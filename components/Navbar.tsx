@@ -38,9 +38,9 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleTheme, isDarkMode }) => {
               {isDarkMode ? 'light_mode' : 'dark_mode'}
             </span>
           </button>
-          <button className="hidden sm:flex items-center justify-center rounded-lg h-10 px-6 bg-primary hover:bg-blue-700 transition-colors text-white text-sm font-bold shadow-sm shadow-blue-500/20">
+          <a href={import.meta.env.VITE_RESUME_URL || '#'} download className="hidden sm:flex items-center justify-center rounded-lg h-10 px-6 bg-primary hover:bg-blue-700 transition-colors text-white text-sm font-bold shadow-sm shadow-blue-500/20">
             Download Resume
-          </button>
+          </a>
           <button className="md:hidden p-2 text-gray-700 dark:text-gray-300">
             <span className="material-symbols-outlined">menu</span>
           </button>

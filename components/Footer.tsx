@@ -13,19 +13,19 @@ const Footer: React.FC = () => {
           ))}
         </div>
         <div className="flex justify-center gap-6">
-           <a href="#" className="text-slate-400 hover:text-primary transition-colors">
+           <a href="https://github.com/20407002036" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
               <span className="material-symbols-outlined">code</span>
            </a>
-           <a href="#" className="text-slate-400 hover:text-primary transition-colors">
+           <a href="https://www.linkedin.com/in/solomon-kaniaru-99bb93280/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
               <span className="material-symbols-outlined">business_center</span>
            </a>
-           <a href="#" className="text-slate-400 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined">mail</span>
+           <a href="https://twitter.com/KaniaruSolomon" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
+              <span className="material-symbols-outlined">alternate_email</span>
            </a>
         </div>
         <div className="pt-8 border-t border-slate-100 dark:border-slate-800">
            <p className="text-sm text-slate-400">
-             © {new Date().getFullYear()} Solomon. Based in Kenya. Engineering with integrity and scale.
+             © {new Date().getFullYear()} Solomon Kaniaru. Based in Nairobi, Kenya. Engineering with integrity and scale.
            </p>
         </div>
       </div>

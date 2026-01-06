@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
                 Building Scalable Systems <br className="hidden lg:block"/> & Robust APIs
               </h1>
               <h2 className="text-lg sm:text-xl font-normal leading-relaxed text-gray-600 dark:text-gray-400 max-w-2xl">
-                Hi, I'm <span className="font-bold text-slate-900 dark:text-white">Solomon</span>, a Software Engineer based in Kenya. I bridge the gap between complex data and seamless user experiences through production-ready backend code.
+                Hi, I'm <span className="font-bold text-slate-900 dark:text-white">Solomon Kaniaru</span>, a Junior Backend Engineer based in Kenya. I specialize in building reliable, well-structured backend systems and APIs using Python (Django, Flask), with a focus on security and maintainability.
               </h2>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -49,26 +49,17 @@ const Hero: React.FC = () => {
 
           <div className="flex-1 w-full max-w-[500px] relative group">
              <div className="absolute -inset-4 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl opacity-50"></div>
-             <div className="relative overflow-hidden rounded-2xl shadow-2xl bg-white dark:bg-surface-dark border border-gray-100 dark:border-gray-800">
-               <div className="flex items-center gap-2 px-4 py-3 bg-gray-50 dark:bg-[#151b26] border-b border-gray-100 dark:border-gray-800">
-                 <div className="flex gap-1.5">
-                   <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                   <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                   <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                 </div>
-                 <div className="text-xs text-gray-400 font-mono ml-4">main.py</div>
-               </div>
-               <div className="p-6 font-mono text-sm space-y-2 bg-[#1e293b] text-blue-300 min-h-[300px]">
-                 <p><span className="text-purple-400">from</span> fastapi <span className="text-purple-400">import</span> FastAPI</p>
-                 <p><span className="text-purple-400">import</span> uvicorn</p>
-                 <p className="mt-4">app = FastAPI(title=<span className="text-green-400">"Solomon_Backend"</span>)</p>
-                 <p className="mt-4"><span className="text-gray-500"># Initializing scalable architecture</span></p>
-                 <p><span className="text-blue-400">@app.get</span>(<span className="text-green-400">"/"</span>)</p>
-                 <p><span className="text-purple-400">async def</span> <span className="text-yellow-400">root</span>():</p>
-                 <p className="pl-4"> <span className="text-purple-400">return</span> {'{'}&#34;status&#34;: <span className="text-green-400">&#34;operational&#34;</span>, &#34;location&#34;: <span className="text-green-400">&#34;Kenya&#34;</span>{'}'}</p>
-                 <div className="mt-8 pt-4 border-t border-slate-700 text-green-400 animate-pulse">
-                   {'>'} [INFO] Server started on port 8000
-                 </div>
+             <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-800">
+               <img 
+                 src="/Images/DSC_6745.JPG" 
+                 alt="Solomon Kaniaru" 
+                 className="w-full h-auto object-cover"
+               />
+             </div>
+             <div className="absolute -bottom-4 -right-4 bg-white dark:bg-[#1a202c] rounded-xl shadow-lg p-4 border border-gray-100 dark:border-gray-800">
+               <div className="flex items-center gap-3">
+                 <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                 <span className="text-sm font-bold text-slate-700 dark:text-slate-300">Open to opportunities</span>
                </div>
              </div>
           </div>

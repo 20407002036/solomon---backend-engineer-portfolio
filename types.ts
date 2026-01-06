@@ -8,8 +8,9 @@ export interface Project {
   impact: string;
   tech: string[];
   imageUrl: string;
-  category: 'Backend' | 'IoT' | 'Fullstack';
+  category: 'Backend' | 'IoT' | 'Fullstack' | 'IoT Backend' | 'AI/ML';
   link?: string;
+  githubUrl?: string;
 }
 
 export interface SkillCategory {

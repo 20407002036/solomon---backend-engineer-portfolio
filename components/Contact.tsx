@@ -18,12 +18,18 @@ const Contact: React.FC = () => {
             
             <div className="space-y-4">
                {[
-                 { label: 'Email', value: 'solomon@example.com', icon: 'mail', color: 'text-primary' },
-                 { label: 'LinkedIn', value: 'Professional Profile', icon: 'business_center', color: 'text-[#0a66c2]' },
-                 { label: 'GitHub', value: 'Code Repositories', icon: 'code', color: 'text-slate-900 dark:text-white' },
-                 { label: 'Location', value: 'Kenya (GMT+3)', icon: 'location_on', color: 'text-red-500' }
+                 { label: 'Twitter/X', value: '@KaniaruSolomon', icon: 'alternate_email', color: 'text-primary', link: 'https://twitter.com/KaniaruSolomon' },
+                 { label: 'LinkedIn', value: 'solomon-kaniaru-99bb93280', icon: 'business_center', color: 'text-[#0a66c2]', link: 'https://www.linkedin.com/in/solomon-kaniaru-99bb93280/' },
+                 { label: 'GitHub', value: '20407002036', icon: 'code', color: 'text-slate-900 dark:text-white', link: 'https://github.com/20407002036' },
+                 { label: 'Location', value: 'Nairobi, Kenya (GMT+3)', icon: 'location_on', color: 'text-red-500' }
                ].map((item) => (
-                 <div key={item.label} className="flex items-start gap-4 p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a202c] shadow-sm transition-all hover:scale-[1.02]">
+                 <a 
+                   key={item.label} 
+                   href={item.link || '#'} 
+                   target={item.link ? '_blank' : undefined}
+                   rel={item.link ? 'noopener noreferrer' : undefined}
+                   className="flex items-start gap-4 p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a202c] shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
+                 >
                    <div className={`${item.color} bg-opacity-10 p-3 rounded-lg`}>
                      <span className="material-symbols-outlined">{item.icon}</span>
                    </div>
@@ -31,7 +37,7 @@ const Contact: React.FC = () => {
                      <h3 className="text-sm font-bold dark:text-white">{item.label}</h3>
                      <p className="text-sm text-slate-500 dark:text-slate-400">{item.value}</p>
                    </div>
-                 </div>
+                 </a>
                ))}
             </div>
 

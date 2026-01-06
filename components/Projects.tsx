@@ -5,36 +5,51 @@ import { Project } from '../types';
 const projects: Project[] = [
   {
     id: "1",
-    title: "ATS_Proto",
+    title: "PropertyPulse",
     category: "Fullstack",
-    description: "Hybrid Applicant Tracking System prototype for automated resume screening.",
-    problem: "Recruiters spend an average of 7.4 seconds scanning a resume. Manual volume screening leads to fatigue and missing top candidates.",
-    approach: "Decoupled architecture: Blazor WASM frontend for the dashboard, Python/FastAPI microservice with spaCy NLP for entity extraction (PERSON, ORG, SKILLS).",
-    impact: "40% reduction in initial screening time with 90% accuracy in skill identification.",
-    tech: ["Blazor (C#)", "Python", "spaCy NLP", "FastAPI", "PostgreSQL"],
-    imageUrl: "https://picsum.photos/seed/ats/800/600"
+    description: "Rental management platform streamlining landlord-tenant interactions.",
+    problem: "Traditional property management involves cumbersome paperwork, manual data entry, and fragmented communication channels between landlords and tenants.",
+    approach: "Flask backend with PostgreSQL database. Implemented role-based access for landlords and tenants, lease management, maintenance request tracking, and online payment processing.",
+    impact: "Streamlined rental workflows with automated notifications and centralized communication hub.",
+    tech: ["Python", "Flask", "PostgreSQL", "HTML/CSS", "REST API"],
+    imageUrl: "https://picsum.photos/seed/property/800/600",
+    githubUrl: "https://github.com/20407002036/PropertyPulse"
   },
   {
     id: "2",
-    title: "Carebook Backend",
-    category: "Backend",
-    description: "Django-based healthcare system with secure data management.",
-    problem: "Managing medical records securely with role-based access for patients and doctors, while ensuring HIPAA compliance.",
-    approach: "Django REST Framework with JWT authentication, custom middleware for role validation, and email verification for onboarding.",
-    impact: "Successfully handled 100+ concurrent requests in testing with optimized database queries.",
-    tech: ["Django", "PostgreSQL", "JWT", "Redis"],
-    imageUrl: "https://picsum.photos/seed/carebook/800/600"
+    title: "URDS-Backend",
+    category: "IoT Backend",
+    description: "Flask backend for IoT sensor data with automated alerting.",
+    problem: "Real-time monitoring of environmental sensors requires reliable data ingestion and instant notifications when thresholds are exceeded.",
+    approach: "Flask application integrated with MySQL for sensor data storage. Implemented automated SMS and email notifications via Ozeki gateway and SMTP for threshold violations.",
+    impact: "24/7 monitoring with real-time alerts for environmental anomalies.",
+    tech: ["Python", "Flask", "MySQL", "SMS/Email API", "IoT"],
+    imageUrl: "https://picsum.photos/seed/urds/800/600",
+    githubUrl: "https://github.com/20407002036/URDS-Backend"
   },
   {
     id: "3",
-    title: "IoT Sensor Data Pipeline",
-    category: "IoT",
-    description: "Real-time monitoring system for environmental sensors.",
-    problem: "Ingesting and visualizing data from distributed ESP32 modules without high latency or data loss.",
-    approach: "Flask backend integrated with MySQL. Implemented automated SMS/Email alerting system for threshold violations using background tasks.",
-    impact: "Provides 24/7 monitoring with less than 2-second alert latency.",
-    tech: ["Flask", "MySQL", "Arduino/ESP", "Twilio API"],
-    imageUrl: "https://picsum.photos/seed/iot/800/600"
+    title: "Mashujaa Voices",
+    category: "AI/ML",
+    description: "Image-to-audio storytelling application using AI services.",
+    problem: "Creating accessible storytelling experiences from visual content for diverse audiences.",
+    approach: "React frontend with Python backend for image analysis. Integrated language/image AI services for story generation and voice synthesis to create narrated audio from uploaded images.",
+    impact: "Enables users to generate personalized audio stories from any image.",
+    tech: ["TypeScript", "React", "Python", "AI/ML APIs", "Vite"],
+    imageUrl: "https://picsum.photos/seed/mashujaa/800/600",
+    githubUrl: "https://github.com/20407002036/mashujaa_voices"
+  },
+  {
+    id: "4",
+    title: "CashTracker",
+    category: "Backend",
+    description: "Personal finance tracking system with income/expense management.",
+    problem: "Tracking personal finances manually is tedious and error-prone, making it hard to understand spending patterns.",
+    approach: "Python CLI application with MySQL database backend. Implemented income/expense tracking with timestamps, source categorization, and net worth calculations.",
+    impact: "Simplified personal finance management with automated calculations and data persistence.",
+    tech: ["Python", "MySQL", "CLI", "OOP"],
+    imageUrl: "https://picsum.photos/seed/cash/800/600",
+    githubUrl: "https://github.com/20407002036/CashTracker"
   }
 ];
 
@@ -86,10 +101,15 @@ const Projects: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                  <button className="w-full flex items-center justify-center gap-2 py-2 rounded-lg border border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all">
-                    View Details
-                    <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
-                  </button>
+                  <a 
+                    href={project.githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center gap-2 py-2 rounded-lg border border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all"
+                  >
+                    View on GitHub
+                    <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                  </a>
                 </div>
               </div>
             </div>

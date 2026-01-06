@@ -35,12 +35,12 @@ const Community: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
            <div className="flex gap-4 items-start p-6 rounded-xl border border-slate-100 dark:border-slate-800">
              <div className="p-3 rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400">
-               <span className="material-symbols-outlined">groups</span>
+               <span className="material-symbols-outlined">workspace_premium</span>
              </div>
              <div>
-               <h3 className="font-bold dark:text-white">GDG Nairobi Involvement</h3>
+               <h3 className="font-bold dark:text-white">Mastercraft Program</h3>
                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                 Actively participating and coordinating technical workshops for 200+ developers on backend and cloud technologies.
+                 Served as Community Manager, coordinating activities and supporting learners in their journey to build backend and full-stack skills. Helped foster collaboration, mentorship, and a culture of continuous learning.
                </p>
              </div>
            </div>
@@ -49,9 +49,9 @@ const Community: React.FC = () => {
                <span className="material-symbols-outlined">school</span>
              </div>
              <div>
-               <h3 className="font-bold dark:text-white">University Mentorship</h3>
+               <h3 className="font-bold dark:text-white">Computer Science Club, Mama Ngina University</h3>
                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                 Mentoring junior students on software engineering best practices, career paths, and technical interviews.
+                 As a founding member, I helped establish a student-led community focused on peer learning, technical workshops, and collaborative projects to grow the next generation of developers.
                </p>
              </div>
            </div>
