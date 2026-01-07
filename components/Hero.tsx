@@ -51,7 +51,7 @@ const Hero: React.FC = () => {
              <div className="absolute -inset-4 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-full blur-3xl opacity-50"></div>
              <div className="relative overflow-hidden rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-800">
                <img 
-                 src="/Images/DSC_6745.JPG" 
+                 src="/images/DSC_6745.JPG" 
                  alt="Solomon Kaniaru" 
                  className="w-full h-auto object-cover"
                />
