@@ -1,59 +1,46 @@
 
 import React from 'react';
-import { Project } from '../types';
-
-const projects: Project[] = [
-  {
-    id: "1",
-    title: "PropertyPulse",
-    category: "Fullstack",
-    description: "Rental management platform streamlining landlord-tenant interactions.",
-    problem: "Traditional property management involves cumbersome paperwork, manual data entry, and fragmented communication channels between landlords and tenants.",
-    approach: "Flask backend with PostgreSQL database. Implemented role-based access for landlords and tenants, lease management, maintenance request tracking, and online payment processing.",
-    impact: "Streamlined rental workflows with automated notifications and centralized communication hub.",
-    tech: ["Python", "Flask", "PostgreSQL", "HTML/CSS", "REST API"],
-    imageUrl: "https://picsum.photos/seed/property/800/600",
-    githubUrl: "https://github.com/20407002036/PropertyPulse"
-  },
-  {
-    id: "2",
-    title: "URDS-Backend",
-    category: "IoT Backend",
-    description: "Flask backend for IoT sensor data with automated alerting.",
-    problem: "Real-time monitoring of environmental sensors requires reliable data ingestion and instant notifications when thresholds are exceeded.",
-    approach: "Flask application integrated with MySQL for sensor data storage. Implemented automated SMS and email notifications via Ozeki gateway and SMTP for threshold violations.",
-    impact: "24/7 monitoring with real-time alerts for environmental anomalies.",
-    tech: ["Python", "Flask", "MySQL", "SMS/Email API", "IoT"],
-    imageUrl: "https://picsum.photos/seed/urds/800/600",
-    githubUrl: "https://github.com/20407002036/URDS-Backend"
-  },
-  {
-    id: "3",
-    title: "Mashujaa Voices",
-    category: "AI/ML",
-    description: "Image-to-audio storytelling application using AI services.",
-    problem: "Creating accessible storytelling experiences from visual content for diverse audiences.",
-    approach: "React frontend with Python backend for image analysis. Integrated language/image AI services for story generation and voice synthesis to create narrated audio from uploaded images.",
-    impact: "Enables users to generate personalized audio stories from any image.",
-    tech: ["TypeScript", "React", "Python", "AI/ML APIs", "Vite"],
-    imageUrl: "https://picsum.photos/seed/mashujaa/800/600",
-    githubUrl: "https://github.com/20407002036/mashujaa_voices"
-  },
-  {
-    id: "4",
-    title: "CashTracker",
-    category: "Backend",
-    description: "Personal finance tracking system with income/expense management.",
-    problem: "Tracking personal finances manually is tedious and error-prone, making it hard to understand spending patterns.",
-    approach: "Python CLI application with MySQL database backend. Implemented income/expense tracking with timestamps, source categorization, and net worth calculations.",
-    impact: "Simplified personal finance management with automated calculations and data persistence.",
-    tech: ["Python", "MySQL", "CLI", "OOP"],
-    imageUrl: "https://picsum.photos/seed/cash/800/600",
-    githubUrl: "https://github.com/20407002036/CashTracker"
-  }
-];
+import { useProjects } from '../hooks/useNotion';
 
 const Projects: React.FC = () => {
+  const { projects, loading, error } = useProjects();
+
+  if (loading) {
+    return (
+      <section className="py-20 bg-white dark:bg-background-dark">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Featured Projects</h2>
+            <p className="mt-4 text-slate-600 dark:text-slate-400 text-lg">Loading projects...</p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="bg-white dark:bg-[#1a202c] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden animate-pulse">
+                <div className="h-48 bg-slate-200 dark:bg-slate-700" />
+                <div className="p-6 space-y-4">
+                  <div className="h-6 bg-slate-200 dark:bg-slate-700 rounded w-3/4" />
+                  <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full" />
+                  <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-2/3" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 bg-white dark:bg-background-dark">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center py-12">
+            <p className="text-red-500">Failed to load projects. Please try again later.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className="py-20 bg-white dark:bg-background-dark">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
