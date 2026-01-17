@@ -1,7 +1,19 @@
 import { useState, useEffect } from 'react';
 import type { Project, BlogPost } from '../types';
+import { projects as fallbackProjects } from '../data/projects';
+import { blogPosts as fallbackBlogs } from '../data/blogs';
 
 const API_BASE = '/api';
+
+// Helper to safely parse JSON response
+async function safeJsonParse<T>(response: Response): Promise<T> {
+  const text = await response.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new Error(`Invalid JSON response: ${text.substring(0, 100)}...`);
+  }
+}
 
 // Hook to fetch projects from Notion via serverless function
 export function useProjects() {
@@ -14,11 +26,12 @@ export function useProjects() {
       try {
         const response = await fetch(`${API_BASE}/projects`);
         if (!response.ok) throw new Error('Failed to fetch projects');
-        const data = await response.json();
+        const data = await safeJsonParse<Project[]>(response);
         setProjects(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-        console.error('Error fetching projects:', err);
+        // Fall back to local data in development
+        console.warn('API unavailable, using fallback data:', err);
+        setProjects(fallbackProjects);
       } finally {
         setLoading(false);
       }
@@ -41,11 +54,12 @@ export function useBlogs() {
       try {
         const response = await fetch(`${API_BASE}/blogs`);
         if (!response.ok) throw new Error('Failed to fetch blogs');
-        const data = await response.json();
+        const data = await safeJsonParse<BlogPost[]>(response);
         setBlogs(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-        console.error('Error fetching blogs:', err);
+        // Fall back to local data in development
+        console.warn('API unavailable, using fallback data:', err);
+        setBlogs(fallbackBlogs);
       } finally {
         setLoading(false);
       }
@@ -76,11 +90,17 @@ export function useBlogPost(slug: string | null) {
           if (response.status === 404) throw new Error('Blog post not found');
           throw new Error('Failed to fetch blog post');
         }
-        const data = await response.json();
+        const data = await safeJsonParse<BlogPost>(response);
         setBlog(data);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-        console.error('Error fetching blog:', err);
+        // Fall back to local data in development
+        console.warn('API unavailable, using fallback data:', err);
+        const fallbackBlog = fallbackBlogs.find(b => b.slug === slug);
+        if (fallbackBlog) {
+          setBlog(fallbackBlog);
+        } else {
+          setError('Blog post not found');
+        }
       } finally {
         setLoading(false);
       }

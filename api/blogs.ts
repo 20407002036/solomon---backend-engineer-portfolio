@@ -30,7 +30,7 @@ export default async function handler(req: Request): Promise<Response> {
       return {
         id: page.id,
         slug: properties.Slug?.rich_text?.[0]?.plain_text || page.id,
-        title: properties.Title?.title?.[0]?.plain_text || '',
+        title: properties.Title?.rich_text?.[0]?.plain_text || '',
         excerpt: properties.Excerpt?.rich_text?.[0]?.plain_text || '',
         publishedAt: properties.PublishedAt?.date?.start || new Date().toISOString(),
         tags: properties.Tags?.multi_select?.map((t: any) => t.name) || [],

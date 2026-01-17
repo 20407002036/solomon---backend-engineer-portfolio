@@ -1,0 +1,8 @@
+{
+  "devCommand": "vite --port $PORT",
+  "framework": "vite",
+  "env": {
+    "NOTION_API_KEY": "@notion_api_key",
+    "NOTION_PROJECTS_DATABASE_ID": "@notion_projects_database_id"
+  }
+}
