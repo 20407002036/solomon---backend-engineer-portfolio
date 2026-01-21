@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import { reportWebVitals } from 'web-vitals';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
@@ -19,11 +18,6 @@ const App: React.FC = () => {
     } else {
       document.documentElement.classList.remove('dark');
     }
-
-    // Track Web Vitals for Vercel Analytics
-    reportWebVitals((metric) => {
-      console.log(metric);
-    });
   }, [isDarkMode]);
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
