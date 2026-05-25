@@ -1,60 +1,55 @@
-
 import React from 'react';
 
 const Community: React.FC = () => {
   return (
-    <section className="py-20 bg-white dark:bg-background-dark">
+    <section id="community" className="py-32 bg-background border-b border-white/[0.03]">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Leadership & Community</h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Passionate about empowering the next generation of developers in Nairobi and beyond.
-          </p>
-        </div>
-
-        <div className="max-w-4xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary/5 to-transparent p-8 md:p-12 border border-primary/10">
-            <span className="material-symbols-outlined absolute top-4 left-4 text-4xl text-primary/20 rotate-180">format_quote</span>
-            <blockquote className="relative z-10 text-center">
-              <p className="text-xl md:text-2xl font-medium text-slate-800 dark:text-slate-200 italic mb-8">
-                "True leadership in engineering isn't just about writing the best code—it's about lifting others up to solve complex problems together."
-              </p>
-              <div className="flex items-center justify-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
-                   <img src="https://picsum.photos/seed/solomon/100/100" alt="Solomon" className="w-full h-full object-cover" />
-                </div>
-                <div className="text-left">
-                  <p className="font-bold text-slate-900 dark:text-white">Solomon</p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Community Lead & Mentor</p>
-                </div>
-              </div>
-            </blockquote>
+        <div className="space-y-24">
+          
+          <div className="space-y-8">
+            <p className="text-[10px] font-mono text-text-muted tracking-[0.4em] uppercase">
+              // LEADERSHIP
+            </p>
+            <h2 className="text-5xl font-bold text-text-main tracking-tight max-w-2xl">
+              Building the next generation <br/> in Nairobi.
+            </h2>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-           <div className="flex gap-4 items-start p-6 rounded-xl border border-slate-100 dark:border-slate-800">
-             <div className="p-3 rounded-lg bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400">
-               <span className="material-symbols-outlined">workspace_premium</span>
-             </div>
-             <div>
-               <h3 className="font-bold dark:text-white">Mastercraft Program</h3>
-               <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                 Served as Community Manager, coordinating activities and supporting learners in their journey to build backend and full-stack skills. Helped foster collaboration, mentorship, and a culture of continuous learning.
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+            <div className="space-y-8">
+               <div className="text-primary opacity-30">
+                  <span className="material-symbols-outlined text-[64px]">format_quote</span>
+               </div>
+               <p className="text-3xl font-medium text-text-main/80 italic leading-snug tracking-tight">
+                 "True leadership in engineering isn't just about writing code—it's about lifting others up to solve complex problems together."
                </p>
-             </div>
-           </div>
-           <div className="flex gap-4 items-start p-6 rounded-xl border border-slate-100 dark:border-slate-800">
-             <div className="p-3 rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400">
-               <span className="material-symbols-outlined">school</span>
-             </div>
-             <div>
-               <h3 className="font-bold dark:text-white">Computer Science Club, Mama Ngina University</h3>
-               <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                 As a founding member, I helped establish a student-led community focused on peer learning, technical workshops, and collaborative projects to grow the next generation of developers.
-               </p>
-             </div>
-           </div>
+               <div className="flex items-center gap-6 pt-6">
+                  <div className="w-16 h-16 rounded-full overflow-hidden grayscale border border-white/10">
+                     <img src="/images/DSC_6745.JPG" alt="Solomon" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-lg font-bold text-text-main">S. Kaniaru</p>
+                    <p className="text-[10px] font-mono text-text-muted uppercase tracking-[0.2em]">Community Lead</p>
+                  </div>
+               </div>
+            </div>
+
+            <div className="space-y-12">
+               <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-text-main uppercase tracking-[0.2em]">MASTERCRAFT PROGRAM</h3>
+                  <p className="text-base text-text-main/40 leading-relaxed font-medium">
+                    Served as Community Manager, coordinating activities and supporting learners in their journey to build backend and full-stack skills.
+                  </p>
+               </div>
+               <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-text-main uppercase tracking-[0.2em]">MNU CS Club</h3>
+                  <p className="text-base text-text-main/40 leading-relaxed font-medium">
+                    Founding member establishing a student-led community focused on peer learning and technical workshops.
+                  </p>
+               </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

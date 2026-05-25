@@ -3,7 +3,7 @@ import type { Project, BlogPost } from '../types';
 import { projects as fallbackProjects } from '../data/projects';
 import { blogPosts as fallbackBlogs } from '../data/blogs';
 
-const API_BASE = '/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 // Helper to safely parse JSON response
 async function safeJsonParse<T>(response: Response): Promise<T> {

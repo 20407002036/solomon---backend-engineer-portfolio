@@ -1,0 +1,6 @@
+flask
+flask-cors
+notion-client
+notion2markdown
+python-dotenv
+flask-caching

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useBlogPost } from '../hooks/useNotion';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -11,7 +13,6 @@ const BlogPostPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  // Handle external URL redirect
   useEffect(() => {
     if (post?.externalUrl) {
       window.location.href = post.externalUrl;
@@ -20,17 +21,17 @@ const BlogPostPage: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="py-20 bg-gray-50 dark:bg-background-dark min-h-screen">
+      <section className="py-32 bg-background min-h-screen">
         <div className="max-w-3xl mx-auto px-6 lg:px-10">
-          <div className="animate-pulse space-y-6">
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-24" />
-            <div className="h-10 bg-slate-200 dark:bg-slate-700 rounded w-3/4" />
-            <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/3" />
-            <div className="h-64 bg-slate-200 dark:bg-slate-700 rounded-2xl" />
-            <div className="space-y-3">
-              <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full" />
-              <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full" />
-              <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-2/3" />
+          <div className="animate-pulse space-y-8">
+            <div className="h-4 bg-surface border border-border rounded w-24"></div>
+            <div className="h-12 bg-surface border border-border rounded w-3/4"></div>
+            <div className="h-4 bg-surface border border-border rounded w-1/4"></div>
+            <div className="h-64 bg-surface border border-border rounded-2xl"></div>
+            <div className="space-y-4">
+               <div className="h-4 bg-surface border border-border rounded w-full"></div>
+               <div className="h-4 bg-surface border border-border rounded w-full"></div>
+               <div className="h-4 bg-surface border border-border rounded w-2/3"></div>
             </div>
           </div>
         </div>
@@ -40,56 +41,20 @@ const BlogPostPage: React.FC = () => {
 
   if (error || !post) {
     return (
-      <section className="py-20 bg-gray-50 dark:bg-background-dark min-h-screen">
-        <div className="max-w-3xl mx-auto px-6 lg:px-10 text-center">
-          <div className="mb-8">
-            <span className="material-symbols-outlined text-6xl text-slate-300 dark:text-slate-600">
-              article
-            </span>
-          </div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-            Post Not Found
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400 mb-8">
-            The blog post you're looking for doesn't exist or has been moved.
+      <section className="py-32 bg-background min-h-screen">
+        <div className="max-w-3xl mx-auto px-6 lg:px-10 text-center space-y-8">
+          <p className="text-[10px] font-mono text-primary font-bold tracking-[0.2em] uppercase">
+            // ERROR: NOT_FOUND
           </p>
+          <h1 className="text-4xl font-bold text-text-main">
+            Post not in archives.
+          </h1>
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-bold"
           >
-            <span className="material-symbols-outlined text-[18px]">arrow_back</span>
             Back to Blog
           </Link>
-        </div>
-      </section>
-    );
-  }
-
-  // Show loading state for external redirects
-  if (post.externalUrl) {
-    return (
-      <section className="py-20 bg-gray-50 dark:bg-background-dark min-h-screen">
-        <div className="max-w-3xl mx-auto px-6 lg:px-10 text-center">
-          <div className="animate-pulse mb-8">
-            <span className="material-symbols-outlined text-6xl text-primary">
-              open_in_new
-            </span>
-          </div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-            Redirecting...
-          </h1>
-          <p className="text-slate-600 dark:text-slate-400 mb-8">
-            Taking you to the external article.
-          </p>
-          <a
-            href={post.externalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-          >
-            Open Article
-            <span className="material-symbols-outlined text-[18px]">open_in_new</span>
-          </a>
         </div>
       </section>
     );
@@ -104,84 +69,77 @@ const BlogPostPage: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-background-dark min-h-screen">
-      <article className="max-w-3xl mx-auto px-6 lg:px-10">
+    <section className="py-32 bg-background min-h-screen relative overflow-hidden">
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-grid pointer-events-none"></div>
+
+      <article className="max-w-3xl mx-auto px-6 lg:px-10 relative z-10">
         {/* Back Link */}
         <Link
           to="/blog"
-          className="inline-flex items-center gap-2 text-sm text-primary hover:underline mb-8"
+          className="inline-flex items-center gap-2 text-[10px] font-mono font-bold text-primary tracking-widest hover:text-primary/80 transition-colors uppercase mb-12"
         >
-          <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-          Back to Blog
+          <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+          Back to Archives
         </Link>
 
         {/* Header */}
-        <header className="mb-10">
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-4">
+        <header className="mb-16 space-y-8">
+          <div className="space-y-4">
+             <p className="text-[10px] font-mono text-primary font-bold tracking-widest uppercase">
+                LOG_{post.id.substring(0, 4)} // {formatDate(post.publishedAt)}
+             </p>
+             <h1 className="text-4xl md:text-5xl font-bold text-text-main tracking-tight leading-tight">
+               {post.title}
+             </h1>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
             {post.tags.map(tag => (
               <span
                 key={tag}
-                className="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary"
+                className="text-[9px] font-mono font-bold tracking-widest text-text-muted/60 uppercase px-2 py-1 bg-surface border border-border rounded"
               >
-                {tag}
+                #{tag}
               </span>
             ))}
-          </div>
-
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 leading-tight">
-            {post.title}
-          </h1>
-
-          {/* Meta */}
-          <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-            <span>{formatDate(post.publishedAt)}</span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <span className="material-symbols-outlined text-[16px]">schedule</span>
-              {post.readingTime} min read
-            </span>
           </div>
         </header>
 
         {/* Cover Image */}
         {post.coverImage && (
-          <div className="mb-10 rounded-2xl overflow-hidden shadow-lg">
+          <div className="mb-16 rounded-2xl overflow-hidden border border-border grayscale hover:grayscale-0 transition-all duration-700">
             <img
               src={post.coverImage}
               alt={post.title}
-              className="w-full h-64 md:h-80 object-cover"
+              className="w-full h-auto object-cover max-h-[400px]"
             />
           </div>
         )}
 
         {/* Content */}
-        <div 
-          className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-600 dark:prose-p:text-slate-400 prose-a:text-primary prose-code:text-primary prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-slate-900 prose-pre:text-slate-100"
-          dangerouslySetInnerHTML={{ __html: post.content || '' }}
-        />
+        <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-text-main prose-p:text-text-main/70 prose-a:text-primary prose-code:text-primary prose-code:bg-surface prose-pre:bg-surface prose-pre:border prose-pre:border-border prose-img:rounded-2xl">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            {post.content || ''}
+          </ReactMarkdown>
+        </div>
 
         {/* Footer */}
-        <footer className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
-            >
-              <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-              Back to all posts
-            </Link>
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-              }}
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary border border-slate-200 dark:border-slate-700 rounded-lg transition-colors"
-            >
-              <span className="material-symbols-outlined text-[18px]">share</span>
-              Share Post
-            </button>
-          </div>
+        <footer className="mt-24 pt-12 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-6">
+          <Link
+            to="/blog"
+            className="text-[10px] font-mono font-bold text-text-muted hover:text-primary transition-colors tracking-widest uppercase"
+          >
+            ← Close Log
+          </Link>
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(window.location.href);
+            }}
+            className="px-6 py-2 text-[10px] font-mono font-bold text-text-muted border border-border rounded hover:border-primary transition-all uppercase tracking-widest"
+          >
+            Share_Entry
+          </button>
         </footer>
       </article>
     </section>

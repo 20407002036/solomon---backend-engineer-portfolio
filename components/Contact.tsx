@@ -1,87 +1,53 @@
-
 import React from 'react';
 
 const Contact: React.FC = () => {
   return (
-    <section className="py-20 bg-background-light dark:bg-[#111827]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-5 space-y-8">
-            <div>
-              <h2 className="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-4">
-                Let's Build Something <span className="text-primary">Scalable</span>
-              </h2>
-              <p className="text-lg text-slate-600 dark:text-slate-400">
-                Currently open to new backend engineering opportunities globally. Whether you have a technical question or a potential collaboration, I'd love to hear from you.
-              </p>
-            </div>
-            
-            <div className="space-y-4">
-               {[
-                 { label: 'Twitter/X', value: '@KaniaruSolomon', icon: 'alternate_email', color: 'text-primary', link: 'https://twitter.com/KaniaruSolomon' },
-                 { label: 'LinkedIn', value: 'solomon-kaniaru-99bb93280', icon: 'business_center', color: 'text-[#0a66c2]', link: 'https://www.linkedin.com/in/solomon-kaniaru-99bb93280/' },
-                 { label: 'GitHub', value: '20407002036', icon: 'code', color: 'text-slate-900 dark:text-white', link: 'https://github.com/20407002036' },
-                 { label: 'Location', value: 'Nairobi, Kenya (GMT+3)', icon: 'location_on', color: 'text-red-500' }
-               ].map((item) => (
-                 <a 
-                   key={item.label} 
-                   href={item.link || '#'} 
-                   target={item.link ? '_blank' : undefined}
-                   rel={item.link ? 'noopener noreferrer' : undefined}
-                   className="flex items-start gap-4 p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a202c] shadow-sm transition-all hover:scale-[1.02] cursor-pointer"
-                 >
-                   <div className={`${item.color} bg-opacity-10 p-3 rounded-lg`}>
-                     <span className="material-symbols-outlined">{item.icon}</span>
-                   </div>
-                   <div>
-                     <h3 className="text-sm font-bold dark:text-white">{item.label}</h3>
-                     <p className="text-sm text-slate-500 dark:text-slate-400">{item.value}</p>
-                   </div>
-                 </a>
-               ))}
-            </div>
+    <section id="contact" className="py-40 bg-background relative overflow-hidden">
+      {/* Subtle Bottom Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-            <div className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a202c] shadow-sm flex items-center gap-4">
-              <div className="size-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                <span className="material-symbols-outlined">schedule</span>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Current Time</p>
-                <p className="text-sm font-bold dark:text-white">Nairobi, Kenya (GMT+3)</p>
-              </div>
-            </div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+        <div className="space-y-20">
+          {/* Section Info */}
+          <div className="space-y-8">
+            <p className="text-[10px] font-mono text-text-muted tracking-[0.4em] uppercase">
+              // CONTACT
+            </p>
+            <h2 className="text-6xl md:text-8xl font-bold text-text-main tracking-tighter leading-none">
+              Got a hard <br className="hidden md:block"/> backend problem?
+            </h2>
+            <p className="max-w-xl text-xl text-text-main/40 leading-relaxed font-medium">
+              I'm open to staff-level roles and consulting on infrastructure, 
+              APIs, and data pipelines. Let's build something that scales.
+            </p>
           </div>
 
-          <div className="lg:col-span-7 bg-white dark:bg-[#1a202c] p-8 md:p-10 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl">
-             <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   <div className="space-y-2">
-                      <label className="text-sm font-bold dark:text-gray-200">Full Name</label>
-                      <input type="text" className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border-transparent focus:ring-primary focus:border-primary transition-all dark:text-white" placeholder="John Doe" />
-                   </div>
-                   <div className="space-y-2">
-                      <label className="text-sm font-bold dark:text-gray-200">Email Address</label>
-                      <input type="email" className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border-transparent focus:ring-primary focus:border-primary transition-all dark:text-white" placeholder="john@example.com" />
-                   </div>
-                </div>
-                <div className="space-y-2">
-                   <label className="text-sm font-bold dark:text-gray-200">Subject</label>
-                   <select className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border-transparent focus:ring-primary focus:border-primary transition-all dark:text-white">
-                      <option>Hiring / Opportunity</option>
-                      <option>Collaboration</option>
-                      <option>Technical Question</option>
-                      <option>Other</option>
-                   </select>
-                </div>
-                <div className="space-y-2">
-                   <label className="text-sm font-bold dark:text-gray-200">Message</label>
-                   <textarea rows={5} className="w-full px-4 py-3 rounded-lg bg-slate-50 dark:bg-slate-800 border-transparent focus:ring-primary focus:border-primary transition-all dark:text-white" placeholder="Tell me about your project..."></textarea>
-                </div>
-                <button type="submit" className="w-full flex items-center justify-center gap-2 py-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg shadow-blue-500/20 transition-all">
-                  <span className="material-symbols-outlined">send</span>
-                  Send Message
-                </button>
-             </form>
+          {/* Action Buttons - Minimal like the image */}
+          <div className="flex flex-wrap gap-6">
+            <a 
+              href="mailto:solomonkaniaru154@gmail.com" 
+              className="px-10 py-5 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all text-sm tracking-widest uppercase"
+            >
+              hello@solomon.dev
+            </a>
+            
+            <a 
+              href="https://github.com/20407002036" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-10 py-5 bg-white/[0.03] border border-white/10 text-white font-bold rounded-xl hover:bg-white/[0.08] transition-all text-sm tracking-widest uppercase"
+            >
+              GitHub
+            </a>
+
+            <a 
+              href="https://www.linkedin.com/in/solomon-kaniaru-99bb93280/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-10 py-5 bg-white/[0.03] border border-white/10 text-white font-bold rounded-xl hover:bg-white/[0.08] transition-all text-sm tracking-widest uppercase"
+            >
+              LinkedIn
+            </a>
           </div>
         </div>
       </div>

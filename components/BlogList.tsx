@@ -20,46 +20,22 @@ const BlogList: React.FC = () => {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: 'numeric'
     });
   };
 
   if (loading) {
     return (
-      <section className="py-20 bg-gray-50 dark:bg-background-dark min-h-screen">
+      <section className="py-32 bg-background min-h-screen">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="mb-12">
-            <Link to="/" className="inline-flex items-center gap-2 text-sm text-primary hover:underline mb-6">
-              <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-              Back to Home
-            </Link>
-            <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Blog</h1>
-            <p className="mt-4 text-slate-600 dark:text-slate-400 text-lg">Loading posts...</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-white dark:bg-[#1a202c] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden animate-pulse">
-                <div className="h-48 bg-slate-200 dark:bg-slate-700" />
-                <div className="p-6 space-y-3">
-                  <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/4" />
-                  <div className="h-6 bg-slate-200 dark:bg-slate-700 rounded w-3/4" />
-                  <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section className="py-20 bg-gray-50 dark:bg-background-dark min-h-screen">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="text-center py-12">
-            <p className="text-red-500">Failed to load blog posts. Please try again later.</p>
+          <div className="animate-pulse space-y-8">
+            <div className="h-4 bg-surface border border-border rounded w-24"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="h-64 bg-surface border border-border rounded-2xl"></div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -67,49 +43,54 @@ const BlogList: React.FC = () => {
   }
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-background-dark min-h-screen">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section className="py-32 bg-background min-h-screen relative overflow-hidden">
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-grid pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-16 space-y-6">
           <Link 
             to="/" 
-            className="inline-flex items-center gap-2 text-sm text-primary hover:underline mb-6"
+            className="inline-flex items-center gap-2 text-[10px] font-mono font-bold text-primary tracking-widest hover:text-primary/80 transition-colors uppercase"
           >
-            <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-            Back to Home
+            <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+            Back to Node
           </Link>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Blog
-          </h1>
-          <p className="mt-4 text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
-            Thoughts on backend development, system design, security, and lessons learned building production systems.
-          </p>
+          <div className="space-y-4">
+            <p className="text-xs font-mono text-text-muted tracking-[0.2em] uppercase">
+              // REPOSITORY / LOGS
+            </p>
+            <h1 className="text-5xl md:text-7xl font-bold text-text-main tracking-tighter">
+              The Archives.
+            </h1>
+          </div>
         </div>
 
         {/* Tag Filter */}
-        <div className="mb-10">
-          <div className="flex flex-wrap gap-2">
+        <div className="mb-12">
+          <div className="flex flex-wrap gap-3">
             <button
               onClick={() => setSelectedTag(null)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              className={`px-4 py-2 rounded-lg text-[10px] font-mono font-bold tracking-widest uppercase transition-all ${
                 selectedTag === null
                   ? 'bg-primary text-white'
-                  : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
+                  : 'bg-surface border border-border text-text-muted hover:border-primary/40'
               }`}
             >
-              All Posts
+              ALL_SYSTEMS
             </button>
             {allTags.map(tag => (
               <button
                 key={tag}
                 onClick={() => setSelectedTag(tag)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg text-[10px] font-mono font-bold tracking-widest uppercase transition-all ${
                   selectedTag === tag
                     ? 'bg-primary text-white'
-                    : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700'
+                    : 'bg-surface border border-border text-text-muted hover:border-primary/40'
                 }`}
               >
-                {tag}
+                {tag.toUpperCase().replace(/\s+/g, '_')}
               </button>
             ))}
           </div>
@@ -123,9 +104,9 @@ const BlogList: React.FC = () => {
         </div>
 
         {filteredPosts.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-slate-500 dark:text-slate-400">
-              No posts found with the selected tag.
+          <div className="text-center py-24 border border-dashed border-border rounded-2xl">
+            <p className="font-mono text-text-muted uppercase tracking-widest">
+              No entries found in current selection.
             </p>
           </div>
         )}
@@ -142,81 +123,63 @@ interface BlogCardProps {
 const BlogCard: React.FC<BlogCardProps> = ({ post, formatDate }) => {
   const isExternal = !!post.externalUrl;
   
-  const CardWrapper = isExternal 
-    ? ({ children }: { children: React.ReactNode }) => (
-        <a 
-          href={post.externalUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="group bg-white dark:bg-[#1a202c] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col"
-        >
-          {children}
-        </a>
-      )
-    : ({ children }: { children: React.ReactNode }) => (
-        <Link 
-          to={`/blog/${post.slug}`}
-          className="group bg-white dark:bg-[#1a202c] rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col"
-        >
-          {children}
-        </Link>
-      );
+  const cardClass = "group relative bg-surface border border-border hover:border-primary/40 rounded-2xl transition-all duration-500 overflow-hidden flex flex-col h-full";
+  
+  const CardContent = (
+    <div className="p-8 flex flex-col h-full space-y-6">
+      {/* Meta */}
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-mono text-primary font-bold tracking-widest uppercase">
+          LOG_{post.id.substring(0, 4)}
+        </span>
+        <span className="text-[10px] font-mono text-text-muted uppercase">
+          {formatDate(post.publishedAt)}
+        </span>
+      </div>
 
-  return (
-    <CardWrapper>
-      {/* Cover Image */}
-      {post.coverImage && (
-        <div className="relative h-48 bg-slate-100 dark:bg-slate-800 overflow-hidden">
-          <img
-            src={post.coverImage}
-            alt={post.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          {isExternal && (
-            <div className="absolute top-4 right-4">
-              <span className="flex items-center gap-1 px-2 py-1 rounded-full bg-black/60 text-white text-[10px] font-medium">
-                <span className="material-symbols-outlined text-[14px]">open_in_new</span>
-                External
-              </span>
-            </div>
-          )}
-        </div>
-      )}
+      {/* Title */}
+      <h3 className="text-xl font-bold text-text-main group-hover:text-primary transition-colors line-clamp-2">
+        {post.title}
+      </h3>
 
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-grow">
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-3">
-          {post.tags.slice(0, 3).map(tag => (
-            <span
-              key={tag}
-              className="text-[10px] font-bold px-2 py-0.5 rounded bg-primary/10 text-primary"
-            >
-              {tag}
-            </span>
+      {/* Excerpt */}
+      <p className="text-sm text-text-muted leading-relaxed line-clamp-3 flex-grow">
+        {post.excerpt}
+      </p>
+
+      {/* Bottom Meta */}
+      <div className="pt-4 flex items-center justify-between border-t border-border/50 group-hover:border-primary/20 transition-colors">
+        <div className="flex gap-2">
+          {post.tags.slice(0, 2).map(t => (
+            <span key={t} className="text-[9px] font-mono text-text-muted/60 uppercase">#{t}</span>
           ))}
         </div>
-
-        {/* Title */}
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors line-clamp-2">
-          {post.title}
-        </h3>
-
-        {/* Excerpt */}
-        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-3 flex-grow">
-          {post.excerpt}
-        </p>
-
-        {/* Meta */}
-        <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500 mt-auto pt-4 border-t border-slate-100 dark:border-slate-800">
-          <span>{formatDate(post.publishedAt)}</span>
-          <span className="flex items-center gap-1">
-            <span className="material-symbols-outlined text-[14px]">schedule</span>
-            {post.readingTime} min read
-          </span>
-        </div>
+        <span className="text-[10px] font-mono text-text-muted">
+          {post.readingTime}m_read
+        </span>
       </div>
-    </CardWrapper>
+    </div>
+  );
+
+  return isExternal ? (
+    <a 
+      href={post.externalUrl} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className={cardClass}
+    >
+      {CardContent}
+      <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+         <span className="material-symbols-outlined text-primary text-[18px]">open_in_new</span>
+      </div>
+    </a>
+  ) : (
+    <Link 
+      to={`/blog/${post.slug}`}
+      className={cardClass}
+    >
+      {CardContent}
+    </Link>
   );
 };
 

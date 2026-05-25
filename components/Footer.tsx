@@ -1,32 +1,16 @@
-
 import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-white dark:bg-[#111827] border-t border-slate-200 dark:border-slate-800 py-12">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 text-center space-y-8">
-        <div className="flex justify-center gap-8">
-          {['Home', 'Projects', 'About', 'Contact'].map(link => (
-            <a key={link} href={`#${link.toLowerCase()}`} className="text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors text-sm font-semibold">
-              {link}
-            </a>
-          ))}
+    <footer className="py-12 bg-background border-t border-border">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-6 font-mono">
+        <div className="text-[10px] text-text-muted uppercase tracking-widest">
+          © {new Date().getFullYear()} · dev.server · Solomon Kaniaru
         </div>
-        <div className="flex justify-center gap-6">
-           <a href="https://github.com/20407002036" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined">code</span>
-           </a>
-           <a href="https://www.linkedin.com/in/solomon-kaniaru-99bb93280/" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined">business_center</span>
-           </a>
-           <a href="https://twitter.com/KaniaruSolomon" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined">alternate_email</span>
-           </a>
-        </div>
-        <div className="pt-8 border-t border-slate-100 dark:border-slate-800">
-           <p className="text-sm text-slate-400">
-             © {new Date().getFullYear()} Solomon Kaniaru. Based in Nairobi, Kenya. Engineering with integrity and scale.
-           </p>
+        
+        <div className="flex items-center gap-2">
+          <div className="w-1 h-1 rounded-full bg-green-500 animate-pulse"></div>
+          <span className="text-[10px] text-text-muted uppercase tracking-[0.2em]">uptime 99.98%</span>
         </div>
       </div>
     </footer>
