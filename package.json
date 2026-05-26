@@ -12,6 +12,9 @@
     "@vercel/analytics": "^1.6.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.15.1",
+    "remark-gfm": "^4.0.1",
     "web-vitals": "^5.1.0"
   },
   "devDependencies": {

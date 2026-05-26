@@ -25,3 +25,14 @@ dist-ssr
 .vercel
 .env*.local
 .env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.env/
+.pytest_cache/
+.python-version
