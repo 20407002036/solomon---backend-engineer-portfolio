@@ -1,5 +1,6 @@
 import os
 import logging
+import re
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_caching import Cache
@@ -88,7 +89,7 @@ def blogs():
 @cache.cached()
 def blog_post(slug):
     # Basic input validation for slug
-    if not slug or not slug.isalnum() and '-' not in slug and '_' not in slug:
+    if not slug or not re.fullmatch(r"[A-Za-z0-9_-]+", slug):
         return jsonify({
             "error": "Bad Request",
             "message": "Invalid slug format.",
