@@ -19,3 +19,17 @@ export interface SkillCategory {
   skills: string[];
   color: string;
 }
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  publishedAt: string;
+  tags: string[];
+  coverImage?: string;
+  readingTime: number;
+  featured?: boolean;
+  content?: string;
+  externalUrl?: string;
+}

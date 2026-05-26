@@ -1,63 +1,77 @@
-
 import React from 'react';
-import { SkillCategory } from '../types';
 
-const skillCategories: SkillCategory[] = [
+const skillCategories = [
   {
-    title: "Backend & APIs",
-    icon: "api",
-    color: "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
-    skills: ["Python", "Django / DRF", "Flask", "FastAPI", "RESTful Design", "NLP (spaCy)", "Authentication (JWT/OAuth)"]
+    id: "01",
+    title: "Languages",
+    skills: "Python · JavaScript · C# · SQL",
+    subtitle: "Go · Rust on the roadmap"
   },
   {
-    title: "Databases",
-    icon: "database",
-    color: "bg-indigo-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400",
-    skills: ["PostgreSQL", "MySQL", "SQLite", "Redis", "SQLAlchemy", "Supabase"]
+    id: "02",
+    title: "Frameworks",
+    skills: "Django · Flask · FastAPI · React",
+    subtitle: "Fast, reliable web primitives"
   },
   {
-    title: "DevOps & Tooling",
-    icon: "terminal",
-    color: "bg-orange-50 text-orange-600 dark:bg-orange-900/20 dark:text-orange-400",
-    skills: ["Git & GitHub", "Linux (Ubuntu)", "Docker", "Postman", "CI/CD Concepts", "Arduino / ESP32"]
+    id: "03",
+    title: "Infra",
+    skills: "Docker · Linux · Nginx · Vercel",
+    subtitle: "Containered and ready to scale"
   },
   {
-    title: "Supporting Skills",
-    icon: "web",
-    color: "bg-pink-50 text-pink-600 dark:bg-pink-900/20 dark:text-pink-400",
-    skills: ["Blazor (MudBlazor)", "React (API Driven)", ".NET MAUI", "Kotlin (Basics)", "Tailwind CSS"]
+    id: "04",
+    title: "Tooling",
+    skills: "Git · Postman · Bash · Arduino",
+    subtitle: "Sharper tools for low latency"
   }
 ];
 
 const Skills: React.FC = () => {
   return (
-    <section className="py-20 bg-background-light dark:bg-[#111827]">
+    <section id="about" className="py-32 bg-background border-y border-white/[0.03]">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Technical Expertise</h2>
-          <p className="mt-4 text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
-            A comprehensive breakdown of my backend-heavy technical toolkit, focusing on robust data processing and API reliability.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((cat) => (
-            <div key={cat.title} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-[#151c2a] transition-all hover:-translate-y-1 hover:shadow-md">
-              <div className="mb-6 flex items-center gap-3 border-b border-slate-100 pb-4 dark:border-slate-800">
-                <div className={`flex size-10 items-center justify-center rounded-full ${cat.color}`}>
-                  <span className="material-symbols-outlined">{cat.icon}</span>
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white">{cat.title}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <span key={skill} className="inline-flex items-center rounded-md bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors hover:border-primary/50">
-                    {skill}
+        
+        <div className="flex flex-col lg:flex-row gap-20 lg:gap-32">
+          {/* Minimal Section Info */}
+          <div className="lg:w-1/3 space-y-8">
+            <p className="text-[10px] font-mono text-text-muted tracking-[0.4em] uppercase">
+              // STACK
+            </p>
+            <h2 className="text-5xl font-bold text-text-main tracking-tight">
+              Tools on <br/> the path
+            </h2>
+            <p className="text-text-main/40 leading-relaxed font-medium">
+              Boring tech where it counts, sharper tools where latency matters. 
+              Always building with a security-first approach.
+            </p>
+          </div>
+
+          {/* High Density Skills Grid */}
+          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-20">
+            {skillCategories.map((cat) => (
+              <div key={cat.id} className="space-y-6">
+                <div className="flex items-center gap-5">
+                  <span className="text-[10px] font-mono text-primary font-bold tracking-widest">
+                    [{cat.id}]
                   </span>
-                ))}
+                  <h3 className="text-lg font-bold text-text-main uppercase tracking-[0.2em]">
+                    {cat.title}
+                  </h3>
+                </div>
+                <div className="space-y-2">
+                   <p className="text-xl text-text-main/80 font-bold tracking-tight">
+                     {cat.skills}
+                   </p>
+                   <p className="text-[10px] font-mono text-text-muted lowercase tracking-widest">
+                     {cat.subtitle}
+                   </p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+        
       </div>
     </section>
   );
