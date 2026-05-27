@@ -4,6 +4,8 @@ import { useProjects } from '../hooks/useNotion';
 const Projects: React.FC = () => {
   const { projects, loading, error } = useProjects();
 
+  const projectList = Array.isArray(projects) ? projects : [];
+
   const getMethod = (category: string) => {
     switch (category.toLowerCase()) {
       case 'iot': return 'STREAM';
@@ -47,7 +49,7 @@ const Projects: React.FC = () => {
 
         {/* High Density Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
-          {projects.map((project) => (
+          {projectList.map((project) => (
             <div 
               key={project.id} 
               className="group relative bg-surface border border-border hover:border-primary/20 rounded-[2.5rem] transition-all duration-700 overflow-hidden"
@@ -80,7 +82,7 @@ const Projects: React.FC = () => {
 
                 {/* Tech Stack - Horizontal pills */}
                 <div className="flex flex-wrap gap-3 pt-6">
-                  {project.tech.map((t) => (
+                  {(Array.isArray(project.tech) ? project.tech : []).map((t) => (
                     <span 
                       key={t} 
                       className="text-[9px] font-mono font-bold tracking-widest text-text-muted uppercase px-3 py-1.5 bg-text-main/[0.02] rounded-lg border border-border group-hover:border-primary/10 transition-colors"

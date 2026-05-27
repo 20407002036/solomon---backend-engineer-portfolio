@@ -108,8 +108,19 @@ def blog_post(slug):
 
 if __name__ == '__main__':
     # Validate critical environment variables
-    required_env = ["NOTION_API_KEY", "NOTION_PROJECTS_DATABASE_ID", "NOTION_BLOGS_DATABASE_ID"]
-    missing = [env for env in required_env if not os.environ.get(env)]
+    notion_token = (
+        os.environ.get("NOTION_API_KEY")
+        or os.environ.get("NOTION_TOKEN")
+        or os.environ.get("NOTION_ACCESS_KEY")
+    )
+
+    missing = []
+    if not notion_token:
+        missing.append("NOTION_API_KEY")
+    if not os.environ.get("NOTION_PROJECTS_DATABASE_ID"):
+        missing.append("NOTION_PROJECTS_DATABASE_ID")
+    if not os.environ.get("NOTION_BLOGS_DATABASE_ID"):
+        missing.append("NOTION_BLOGS_DATABASE_ID")
     
     if missing:
         logger.error(f"Missing required environment variables: {', '.join(missing)}")

@@ -15,6 +15,18 @@ async function safeJsonParse<T>(response: Response): Promise<T> {
   }
 }
 
+function normalizeArrayResponse<T>(payload: unknown, keys: string[]): T[] {
+  if (Array.isArray(payload)) return payload as T[];
+  if (payload && typeof payload === 'object') {
+    const record = payload as Record<string, unknown>;
+    for (const key of keys) {
+      const value = record[key];
+      if (Array.isArray(value)) return value as T[];
+    }
+  }
+  throw new Error('Unexpected API response shape (expected an array).');
+}
+
 // Hook to fetch projects from Notion via serverless function
 export function useProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -26,12 +38,14 @@ export function useProjects() {
       try {
         const response = await fetch(`${API_BASE}/projects`);
         if (!response.ok) throw new Error('Failed to fetch projects');
-        const data = await safeJsonParse<Project[]>(response);
+        const payload = await safeJsonParse<unknown>(response);
+        const data = normalizeArrayResponse<Project>(payload, ['projects', 'data', 'results']);
         setProjects(data);
       } catch (err) {
         // Fall back to local data in development
         console.warn('API unavailable, using fallback data:', err);
         setProjects(fallbackProjects);
+        setError(err instanceof Error ? err.message : 'Failed to fetch projects');
       } finally {
         setLoading(false);
       }
@@ -54,12 +68,14 @@ export function useBlogs() {
       try {
         const response = await fetch(`${API_BASE}/blogs`);
         if (!response.ok) throw new Error('Failed to fetch blogs');
-        const data = await safeJsonParse<BlogPost[]>(response);
+        const payload = await safeJsonParse<unknown>(response);
+        const data = normalizeArrayResponse<BlogPost>(payload, ['blogs', 'data', 'results']);
         setBlogs(data);
       } catch (err) {
         // Fall back to local data in development
         console.warn('API unavailable, using fallback data:', err);
         setBlogs(fallbackBlogs);
+        setError(err instanceof Error ? err.message : 'Failed to fetch blogs');
       } finally {
         setLoading(false);
       }
