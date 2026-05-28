@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useBlogPost } from '../hooks/useNotion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
   const { blog: post, loading, error } = useBlogPost(slug || null);
 
   useEffect(() => {
@@ -40,15 +39,21 @@ const BlogPostPage: React.FC = () => {
   }
 
   if (error || !post) {
+    const isNotFound = (error || '').toLowerCase().includes('not found');
     return (
       <section className="py-32 bg-background min-h-screen">
         <div className="max-w-3xl mx-auto px-6 lg:px-10 text-center space-y-8">
           <p className="text-[10px] font-mono text-primary font-bold tracking-[0.2em] uppercase">
-            // ERROR: NOT_FOUND
+            {isNotFound ? '// ERROR: NOT_FOUND' : '// ERROR: OFFLINE'}
           </p>
           <h1 className="text-4xl font-bold text-text-main">
-            Post not in archives.
+            {isNotFound ? 'Post not in archives.' : 'Log temporarily unavailable.'}
           </h1>
+          {!isNotFound && (
+            <p className="text-sm text-text-muted max-w-md mx-auto leading-relaxed">
+              The backend is not responding right now. Try again in a bit.
+            </p>
+          )}
           <Link
             to="/blog"
             className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg font-bold"
@@ -112,6 +117,9 @@ const BlogPostPage: React.FC = () => {
             <img
               src={post.coverImage}
               alt={post.title}
+              onError={(e) => {
+                e.currentTarget.src = '/images/blog-placeholder.svg';
+              }}
               className="w-full h-auto object-cover max-h-[400px]"
             />
           </div>
@@ -119,7 +127,20 @@ const BlogPostPage: React.FC = () => {
 
         {/* Content */}
         <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-text-main prose-p:text-text-main/70 prose-a:text-primary prose-code:text-primary prose-code:bg-surface prose-pre:bg-surface prose-pre:border prose-pre:border-border prose-img:rounded-2xl">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              img: ({ node, ...props }) => (
+                // eslint-disable-next-line jsx-a11y/alt-text
+                <img
+                  {...props}
+                  onError={(e) => {
+                    e.currentTarget.src = '/images/blog-placeholder.svg';
+                  }}
+                />
+              ),
+            }}
+          >
             {post.content || ''}
           </ReactMarkdown>
         </div>
