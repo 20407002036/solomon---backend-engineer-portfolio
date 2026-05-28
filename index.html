@@ -46,7 +46,8 @@
         --color-surface: #0a0a0a;
         --color-border: #1a1a1a;
         --color-text-main: #ffffff;
-        --color-text-muted: #444444;
+        /* Increase contrast for metadata/nav in dark mode */
+        --color-text-muted: #a3a3a3;
       }
 
       .material-symbols-outlined {
@@ -88,7 +89,6 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
   <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased transition-colors duration-200">
     <div id="root"></div>
