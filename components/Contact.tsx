@@ -26,7 +26,7 @@ const Contact: React.FC = () => {
           <div className="flex flex-wrap gap-6">
             <a 
               href="mailto:solomonkaniaru154@gmail.com" 
-              className="px-10 py-5 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all text-sm tracking-widest uppercase"
+              className="px-10 py-5 bg-primary text-white font-bold rounded-xl hover:bg-primary/80 transition-all text-sm tracking-widest uppercase"
             >
               solomonkaniaru154@gmail.com
             </a>
@@ -35,7 +35,7 @@ const Contact: React.FC = () => {
               href="https://github.com/20407002036" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-10 py-5 bg-white/[0.03] border border-white/10 text-white font-bold rounded-xl hover:bg-white/[0.08] transition-all text-sm tracking-widest uppercase"
+              className="px-10 py-5 bg-surface border border-border text-text-main font-bold rounded-xl hover:border-primary/40 hover:bg-text-main/[0.03] transition-all text-sm tracking-widest uppercase"
             >
               GitHub
             </a>
@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
               href="https://www.linkedin.com/in/solomon-kaniaru-99bb93280/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-10 py-5 bg-white/[0.03] border border-white/10 text-white font-bold rounded-xl hover:bg-white/[0.08] transition-all text-sm tracking-widest uppercase"
+              className="px-10 py-5 bg-surface border border-border text-text-main font-bold rounded-xl hover:border-primary/40 hover:bg-text-main/[0.03] transition-all text-sm tracking-widest uppercase"
             >
               LinkedIn
             </a>

@@ -29,7 +29,7 @@ const skillCategories = [
 
 const Skills: React.FC = () => {
   return (
-    <section id="about" className="py-32 bg-background border-y border-white/[0.03]">
+    <section id="about" className="py-32 bg-background border-y border-border">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         
         <div className="flex flex-col lg:flex-row gap-20 lg:gap-32">

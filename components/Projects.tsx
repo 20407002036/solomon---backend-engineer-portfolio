@@ -97,14 +97,17 @@ const Projects: React.FC = () => {
               <div className="absolute inset-0 bg-primary/[0.02] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
               
               {/* GitHub Link Overlay */}
-              <a 
-                href={project.githubUrl || '#'} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="absolute top-8 right-8 opacity-0 group-hover:opacity-100 transition-all p-3 bg-surface hover:bg-primary text-text-main hover:text-white rounded-full border border-border shadow-2xl translate-y-2 group-hover:translate-y-0"
-              >
-                 <span className="material-symbols-outlined text-[20px]">open_in_new</span>
-              </a>
+              {project.githubUrl ? (
+                <a 
+                  href={project.githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${project.title} on GitHub`}
+                  className="absolute top-8 right-8 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all p-3 bg-surface hover:bg-primary text-text-main hover:text-white rounded-full border border-border shadow-2xl md:translate-y-2 md:group-hover:translate-y-0"
+                >
+                  <span className="material-symbols-outlined text-[20px]">open_in_new</span>
+                </a>
+              ) : null}
             </div>
           ))}
         </div>
