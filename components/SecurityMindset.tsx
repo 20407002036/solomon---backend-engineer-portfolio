@@ -2,7 +2,7 @@ import React from 'react';
 
 const SecurityMindset: React.FC = () => {
   return (
-    <section id="security" className="py-32 bg-background border-b border-white/[0.03]">
+    <section id="security" className="py-32 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row gap-20 lg:gap-32">
           

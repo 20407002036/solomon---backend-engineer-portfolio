@@ -115,7 +115,7 @@ export function useBlogPost(slug: string | null) {
         if (fallbackBlog) {
           setBlog(fallbackBlog);
         } else {
-          setError('Blog post not found');
+          setError(err instanceof Error ? err.message : 'Failed to fetch blog post');
         }
       } finally {
         setLoading(false);
