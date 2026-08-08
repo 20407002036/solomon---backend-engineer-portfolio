@@ -6,26 +6,31 @@ from notion_client import Client
 
 load_dotenv()
 
-# Prefer a single token for the whole workspace. One integration token can be
-# shared/connected to multiple databases.
 NOTION_TOKEN = (
-    os.environ.get("NOTION_API_KEY")
+    os.environ.get("NOTION_ACCESS_KEY")
+    or os.environ.get("NOTION_API_KEY")
     or os.environ.get("NOTION_TOKEN")
-    or os.environ.get("NOTION_ACCESS_KEY")
 )
 
 PROJECTS_DATABASE_ID = os.environ.get("NOTION_PROJECTS_DATABASE_ID")
 BLOGS_DATABASE_ID = os.environ.get("NOTION_BLOGS_DATABASE_ID")
 
-_notion: Client | None = Client(auth=NOTION_TOKEN) if NOTION_TOKEN else None
+_notion: Client | None = None
+
+
+def _get_notion() -> Client:
+    global _notion
+    if _notion is None:
+        if not NOTION_TOKEN:
+            raise RuntimeError(
+                "Missing Notion token. Set NOTION_API_KEY (recommended) or NOTION_TOKEN."
+            )
+        _notion = Client(auth=NOTION_TOKEN)
+    return _notion
 
 
 def _require_notion() -> Client:
-    if not _notion:
-        raise RuntimeError(
-            "Missing Notion token. Set NOTION_API_KEY (recommended) or NOTION_TOKEN."
-        )
-    return _notion
+    return _get_notion()
 
 
 def _rich_text_to_markdown(rich_text: list[dict[str, Any]] | None) -> str:
@@ -270,6 +275,20 @@ def _extract_cover_image(page: dict[str, Any], props: dict[str, Any]) -> str | N
 
     return None
 
+def _get_tech_list(props: dict[str, Any]) -> list[str]:
+    """Tech may be a single select or a multi_select depending on the DB schema."""
+    tech_prop = props.get("Tech") or {}
+    tech_type = tech_prop.get("type")
+    if tech_type == "multi_select":
+        multi = tech_prop.get("multi_select") or []
+        return [t.get("name") for t in multi if isinstance(t, dict) and t.get("name")]
+    if tech_type == "select":
+        select = tech_prop.get("select") or {}
+        name = select.get("name")
+        return [name] if name else []
+    return []
+
+
 def get_projects():
     if not PROJECTS_DATABASE_ID:
         return []
@@ -277,10 +296,6 @@ def get_projects():
     notion = _require_notion()
     projects_data_source_id = _get_database_data_source_id(notion, PROJECTS_DATABASE_ID)
 
-    # print("*"*80)
-    # print(projects_data_source_id)
-    # print("*"*80)
-    
     response = notion.data_sources.query(
         data_source_id=projects_data_source_id,
         sorts=[{"property": "Title", "direction": "ascending"}]
@@ -296,23 +311,29 @@ def get_projects():
         props = page.get("properties") or {}
 
         category_select = (props.get("Category") or {}).get("select") or {}
-        tech_multi = (props.get("Tech") or {}).get("multi_select") or []
         image_url = (props.get("ImageUrl") or {}).get("url")
         github_url = (props.get("GithubUrl") or {}).get("url")
-        
+        title = get_property_value(props.get("Title")) or get_property_value(props.get("Name"))
+
         projects.append({
             "id": page.get("id"),
-            "title": get_property_value(props.get("Title")),
+            "title": title,
             "category": category_select.get("name") or "Backend",
             "description": get_property_value(props.get("Description")),
             "problem": get_property_value(props.get("Problem")),
             "approach": get_property_value(props.get("Approach")),
             "impact": get_property_value(props.get("Impact")),
-            "tech": [t.get("name") for t in tech_multi if isinstance(t, dict)],
+            "tech": _get_tech_list(props),
             "imageUrl": image_url or "/images/project-placeholder.jpg",
             "githubUrl": github_url,
+            "featured": props.get("Featured", {}).get("checkbox") or False,
+            "sortOrder": props.get("SortOrder", {}).get("number") or 0,
+            "stars": props.get("Stars", {}).get("number") or 0,
+            "updatedAt": ((props.get("UpdatedAt") or {}).get("date") or {}).get("start"),
         })
-    
+
+    # Featured first, then explicit SortOrder, then title.
+    projects.sort(key=lambda p: (not p.get("featured"), p.get("sortOrder") or 0, p.get("title") or ""))
     return projects
 
 def get_blogs():
