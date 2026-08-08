@@ -4,7 +4,14 @@ import { useProjects } from '../hooks/useNotion';
 const Projects: React.FC = () => {
   const { projects, loading, error } = useProjects();
 
-  const projectList = Array.isArray(projects) ? projects : [];
+  const projectList = (Array.isArray(projects) ? projects : [])
+    .slice()
+    .sort((a, b) => {
+      if ((a.featured && b.featured) || (!a.featured && !b.featured)) {
+        return (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
+      }
+      return a.featured ? -1 : 1;
+    });
 
   const getMethod = (category: string) => {
     switch (category.toLowerCase()) {
@@ -66,7 +73,7 @@ const Projects: React.FC = () => {
                     </span>
                   </div>
                   <div className="px-3 py-1 bg-text-main/[0.03] border border-border rounded-full text-[9px] font-mono text-text-muted uppercase tracking-[0.2em]">
-                    STABLE
+                    {project.featured ? 'FEATURED' : 'STABLE'}
                   </div>
                 </div>
 

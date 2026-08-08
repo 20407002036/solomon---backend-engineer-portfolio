@@ -11,13 +11,10 @@ export interface Project {
   category: 'Backend' | 'IoT' | 'Fullstack' | 'IoT Backend' | 'AI/ML';
   link?: string;
   githubUrl?: string;
-}
-
-export interface SkillCategory {
-  title: string;
-  icon: string;
-  skills: string[];
-  color: string;
+  featured?: boolean;
+  sortOrder?: number;
+  stars?: number;
+  updatedAt?: string;
 }
 
 export interface BlogPost {
