@@ -8,7 +8,7 @@ export interface Project {
   impact: string;
   tech: string[];
   imageUrl: string;
-  category: string;
+  category: 'Backend' | 'IoT' | 'Fullstack' | 'IoT Backend' | 'AI/ML';
   link?: string;
   githubUrl?: string;
   featured?: boolean;
