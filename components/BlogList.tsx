@@ -2,14 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useBlogs } from '../hooks/useNotion';
 import { BlogPost } from '../types';
-import { useDocumentMetadata } from '../hooks/useDocumentMetadata';
 
 const BlogList: React.FC = () => {
-  useDocumentMetadata({
-    title: 'The Archives | Solomon Kaniaru',
-    description: 'Technical archives and logs on backend engineering, Python, APIs, and scalable secure systems written by Solomon Kaniaru.'
-  });
-
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const { blogs: blogPosts, loading, error } = useBlogs();
   

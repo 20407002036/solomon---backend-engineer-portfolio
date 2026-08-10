@@ -5,49 +5,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solomon Kaniaru | Backend Engineer</title>
-    <meta name="description" content="A professional portfolio for Solomon Kaniaru, a Kenya-based Junior Backend Engineer specializing in Python, APIs, and scalable systems with a security-first mindset." />
-    <meta name="keywords" content="Solomon Kaniaru, Backend Engineer, Kenya, Python, APIs, Software Engineer, Portfolio, Developer, Cybersecurity, System Design" />
-    <meta name="author" content="Solomon Kaniaru" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.solomonkaniaru.me/" /> 
-    <meta property="og:title" content="Solomon Kaniaru | Backend Engineer" />
-    <meta property="og:description" content="Portfolio of Solomon Kaniaru, a Kenya-based Backend Engineer specializing in Python, APIs, and secure scalable systems." />
-    <meta property="og:image" content="https://www.solomonkaniaru.me/images/DSC_6745.JPG" /> 
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://www.solomonkaniaru.me/" /> 
-    <meta property="twitter:title" content="Solomon Kaniaru | Backend Engineer" />
-    <meta property="twitter:description" content="Portfolio of Solomon Kaniaru, a Kenya-based Backend Engineer specializing in Python, APIs, and secure scalable systems." />
-    <meta property="twitter:image" content="https://www.solomonkaniaru.me/images/DSC_6745.JPG" /> 
-
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Solomon Kaniaru",
-        "jobTitle": "Backend Engineer",
-        "description": "Kenya-based Backend Engineer specializing in Python, APIs, and scalable systems with a security-first mindset.",
-        "url": "https://www.solomonkaniaru.me/",
-        "knowsAbout": [
-          "Python",
-          "API Design",
-          "Database Systems",
-          "Scalable Infrastructure",
-          "Application Security",
-          "TypeScript",
-          "React"
-        ],
-        "sameAs": [
-          "https://github.com/20407002036",
-          "https://www.linkedin.com/in/solomon-kaniaru-99bb93280/"
-        ]
-      }
-    </script>
-
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -81,7 +38,6 @@
         --color-border: #eeeeee;
         --color-text-main: #000000;
         --color-text-muted: #666666;
-        --color-grid: #0000001a;
       }
 
       .dark {
@@ -92,7 +48,6 @@
         --color-text-main: #ffffff;
         /* Increase contrast for metadata/nav in dark mode */
         --color-text-muted: #a3a3a3;
-        --color-grid: #ffffff0a;
       }
 
       .material-symbols-outlined {
@@ -114,7 +69,7 @@
       }
       .bg-grid {
         background-size: 60px 60px;
-        background-image: radial-gradient(circle, var(--color-grid) 1px, transparent 1px);
+        background-image: radial-gradient(circle, #111 1px, transparent 1px);
       }
       ::selection {
         background: var(--color-primary);
@@ -135,7 +90,7 @@
 }
 </script>
 </head>
-  <body class="bg-background text-slate-900 dark:text-white antialiased transition-colors duration-200">
+  <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased transition-colors duration-200">
     <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
 </body>

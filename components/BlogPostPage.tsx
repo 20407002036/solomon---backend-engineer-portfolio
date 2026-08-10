@@ -3,16 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import { useBlogPost } from '../hooks/useNotion';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useDocumentMetadata } from '../hooks/useDocumentMetadata';
 
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const { blog: post, loading, error } = useBlogPost(slug || null);
-
-  useDocumentMetadata({
-    title: post ? `${post.title} | Solomon Kaniaru` : 'Loading Blog...',
-    description: post ? post.excerpt : 'Loading technical blog post on backend engineering...'
-  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
