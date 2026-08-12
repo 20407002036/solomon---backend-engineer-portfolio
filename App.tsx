@@ -8,9 +8,6 @@ import SecurityMindset from './components/SecurityMindset';
 import Community from './components/Community';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import LatestPosts from './components/LatestPosts';
-import BlogList from './components/BlogList';
-import BlogPostPage from './components/BlogPostPage';
 
 const HomePage: React.FC = () => {
   return (
@@ -19,7 +16,6 @@ const HomePage: React.FC = () => {
       <Skills />
       <Projects />
       <SecurityMindset />
-      <LatestPosts />
       <Community />
       <Contact />
     </main>
@@ -69,8 +65,6 @@ const App: React.FC = () => {
         <div className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/blog" element={<BlogList />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
           </Routes>
         </div>
         <Footer />
