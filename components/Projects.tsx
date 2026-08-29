@@ -1,6 +1,27 @@
 import React, { useState, useMemo } from 'react';
 import { useProjects } from '../hooks/useNotion';
 
+// Live preview of a deployed project.
+// Most production sites block inline framing via X-Frame-Options / CSP,
+// so we render a screenshot of the live URL directly (no iframe attempt).
+const LiveProjectPreview: React.FC<{ liveUrl: string; title: string }> = ({ liveUrl, title }) => {
+  const shot = `https://api.microlink.io/?url=${encodeURIComponent(liveUrl)}&screenshot=true&embed=screenshot.url`;
+  return (
+    <div className="relative aspect-[16/9] bg-text-main/[0.03] border border-border rounded-2xl overflow-hidden mb-6">
+      <img
+        src={shot}
+        alt={`Preview of ${title}`}
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        className="w-full h-full object-cover object-top"
+      />
+      <span className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 text-white text-[9px] font-mono rounded">
+        LIVE_PREVIEW
+      </span>
+    </div>
+  );
+};
+
 const Projects: React.FC = () => {
   const { projects, loading, error } = useProjects();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -182,11 +203,27 @@ const Projects: React.FC = () => {
 
         {/* High Density Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
-          {filtered.map((project) => (
+          {filtered.map((project) => {
+            // The live page URL is stored in the Notion "ImageUrl" property,
+            // exposed by the backend as `imageUrl`.
+            const live = project.liveUrl || project.imageUrl;
+            const hasLive = !!live && live !== "/images/project-placeholder.jpg";
+            return (
             <div
               key={project.id}
               className="group relative bg-surface border border-border hover:border-primary/20 rounded-[2.5rem] transition-all duration-700 overflow-hidden"
             >
+              {hasLive ? (
+                <LiveProjectPreview liveUrl={live} title={project.title} />
+              ) : (
+                <div className="relative aspect-[16/9] bg-text-main/[0.03] border-b border-border overflow-hidden mb-6">
+                  <div className="w-full h-full flex items-center justify-center">
+                    <span className="text-[10px] font-mono text-text-muted/50 uppercase tracking-widest">
+                      NO_LIVE_PREVIEW
+                    </span>
+                  </div>
+                </div>
+              )}
               <div className="p-10 space-y-8">
                 {/* Meta Header */}
                 <div className="flex items-center justify-between gap-4">
@@ -252,6 +289,19 @@ const Projects: React.FC = () => {
               {/* Subtle Overlay */}
               <div className="absolute inset-0 bg-primary/[0.02] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
+              {/* Live Site Link Overlay */}
+              {hasLive ? (
+                <a
+                  href={live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${project.title} live site`}
+                  className="absolute top-8 right-8 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all p-3 bg-surface hover:bg-primary text-text-main hover:text-white rounded-full border border-border shadow-2xl md:translate-y-2 md:group-hover:translate-y-0"
+                >
+                  <span className="material-symbols-outlined text-[20px]">language</span>
+                </a>
+              ) : null}
+
               {/* GitHub Link Overlay */}
               {project.githubUrl ? (
                 <a
@@ -259,13 +309,14 @@ const Projects: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Open ${project.title} on GitHub`}
-                  className="absolute top-8 right-8 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all p-3 bg-surface hover:bg-primary text-text-main hover:text-white rounded-full border border-border shadow-2xl md:translate-y-2 md:group-hover:translate-y-0"
+                  className={`absolute top-8 ${hasLive ? 'right-24' : 'right-8'} opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all p-3 bg-surface hover:bg-primary text-text-main hover:text-white rounded-full border border-border shadow-2xl md:translate-y-2 md:group-hover:translate-y-0`}
                 >
                   <span className="material-symbols-outlined text-[20px]">open_in_new</span>
                 </a>
               ) : null}
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Empty State */}
