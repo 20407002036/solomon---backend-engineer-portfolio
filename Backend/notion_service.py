@@ -325,6 +325,7 @@ def get_projects():
             "impact": get_property_value(props.get("Impact")),
             "tech": _get_tech_list(props),
             "imageUrl": image_url or "/images/project-placeholder.jpg",
+            "liveUrl": (props.get("LiveUrl") or {}).get("url"),
             "githubUrl": github_url,
             "featured": props.get("Featured", {}).get("checkbox") or False,
             "sortOrder": props.get("SortOrder", {}).get("number") or 0,
