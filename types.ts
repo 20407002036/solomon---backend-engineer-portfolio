@@ -10,6 +10,7 @@ export interface Project {
   imageUrl: string;
   category: string;
   link?: string;
+  liveUrl?: string;
   githubUrl?: string;
   featured?: boolean;
   sortOrder?: number;
