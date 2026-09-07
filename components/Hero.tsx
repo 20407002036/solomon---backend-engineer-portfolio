@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-32">
 
           {/* Text Content */}
-          <div className="flex-1 space-y-12">
+          <div className="w-full lg:flex-1 space-y-12">
             <div className="space-y-6">
               <h1 className="text-7xl md:text-9xl font-bold tracking-tighter leading-none flex flex-col">
                 <span className="text-text-main">Solomon</span>
@@ -62,10 +62,10 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Interactive Dev Card with Lanyard */}
-          <div className="flex-1 relative flex justify-center pt-24">
+          <div className="relative flex w-full min-h-[500px] justify-center lg:flex-1">
 
             {/* Lanyard Strap - The defining visual from the image */}
-            <div className="absolute -top-[500px] left-1/2 -translate-x-1/2 w-8 h-[500px] bg-primary shadow-2xl z-30">
+            <div className="absolute -top-8 h-8 lg:-top-[500px] lg:h-[500px] left-1/2 -translate-x-1/2 w-8 bg-primary shadow-2xl z-30">
                {/* Lanyard Metal Grommet */}
                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#111] border-2 border-white/20 shadow-inner"></div>
             </div>
@@ -83,7 +83,7 @@ const Hero: React.FC = () => {
               }}
               animate={{ x: 0, y: 0 }}
               transition={{ type: 'spring', stiffness: 120, damping: 15 }}
-              className="relative w-80 h-[500px] transform perspective-2000 cursor-grab active:cursor-grabbing"
+              className="relative w-full max-w-[320px] h-[500px] transform perspective-2000 cursor-grab active:cursor-grabbing"
             >
               {/* Card Body - True Black like the image */}
               <div className="absolute inset-0 bg-[#050505] border border-white/10 rounded-3xl overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] flex flex-col">
